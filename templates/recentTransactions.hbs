@@ -1,0 +1,22 @@
+<table class="table" id="recentTransactionTable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">Category</th>
+      <th scope="col">Amount ({{currency}})</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each transactions}}
+    <tr>
+      <th scope="row">{{incrementIndex @index}}</th>
+      <td>{{date}}</td>
+      <td>{{category}}</td>
+      <td style="color: {{amountColor}};">{{amount}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+

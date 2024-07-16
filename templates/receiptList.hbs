@@ -1,0 +1,19 @@
+{{#each receipts}}
+    <tr>
+        <td>{{incrementIndex @index}}</td>
+        <td>{{DATE}}</td>
+        <td>{{CATEGORY}}</td>
+        <td>{{AMOUNT}}</td>
+        <td>{{TYPE}}</td>
+        <td>
+        <button type="button"  class="btn btn-danger "  onclick="deleteReceipt({{RECEIPTID}})">
+                        <i class="bi bi-trash3-fill"></i>
+        </button>
+        </td>
+        <td>
+        <button type="button"  class="btn btn-primary "  onclick="downloadReceipt('/Assignments/Mini_Project{{FILEPATH}}')">
+                        <i class="bi bi-eye-fill"></i>
+        </button>
+        </td>
+    </tr>
+{{/each}}

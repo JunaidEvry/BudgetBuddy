@@ -1,0 +1,20 @@
+
+              {{#each this}}
+                <tr data-type="{{TYPE}}">
+                  <th scope="row">{{ID}}</th>
+                  <td>{{NAME}}</td>
+                  <th>{{TYPE}}</th>
+                  <td>
+                    <button type="button" class="btn btn-primary" onclick="openUpdateModal({{ID}}, '{{NAME}}')">
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" onclick="deleteCategory({{ID}})">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              {{/each}}
+
+   

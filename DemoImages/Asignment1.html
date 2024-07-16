@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handlebars Extended Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+</head>
+
+
+<body>
+    <script id="main-template" type="text/x-handlebars-template">
+        <div>
+            <h1>Q1</h1>
+            {{#each posts}}
+            <h2>{{title}}</h2> 
+            <p>by {{author}}</p> 
+            <ul> 
+                {{#each tags}}
+                <li>{{this}}</li> 
+                {{/each}}
+            </ul> 
+            {{/each}}
+            <h1>Q2</h1>
+            <h2>{{event.name}}</h2>
+            <p>{{formatDate event.date}}</p>
+            <h1>Q3</h1>
+            <h2>products</h2>
+            {{#each products}}
+                {{#if onSale}}
+                <p>Name:{{name}}</p>
+                <p>Price:{{salePrice}}</p>
+                {{else}}
+                <p>Name:{{name}}</p>
+                <p>Price:{{price}}</p>
+                {{/if}}
+            {{/each}}
+            <h1>Q4</h1>
+            <header> 
+                <h2>Users List</h2>
+            </header> 
+            <div> 
+                {{#each users}}
+                <div> 
+                    <p>Name:{{name}}</p> 
+                    <p>Age: {{age}}</p> 
+                    <p>Email: {{email}}</p> 
+                </div> 
+                {{/each}}
+                {{> footer}} 
+            <h1>Q5</h1>
+            {{#with article}}
+            <h3>{{title}}</h3>
+            <p>{{truncateString content}}</p>
+            {{/with}}
+            <h1>Q6</h1>
+            {{#each sections}}
+                {{#if isHeader}}
+                     {{> header-content}}
+                {{else if isBody}}
+                    {{> body-content}}
+                {{else}}
+                    {{> footer-content}}
+                {{/if}}
+            {{/each}}  
+        </div>
+    </script>
+    <script id="footer-template" type="text/x-handlebars-template">
+        <footer>
+            <p>© {{currentYear}} My Company</p>
+        </footer>
+    </script>
+    <script id="header-content-template" type="text/x-handlebars-template">
+        <header>
+            <p>{{content}}</p> 
+        </header>
+    </script>
+    <script id="body-content-template" type="text/x-handlebars-template">
+      
+            <p>{{content}}</p> 
+       
+    </script>
+    <script id="footer-content-template" type="text/x-handlebars-template">
+        
+            <p>{{content}}</p> 
+        
+    </script>
+    
+    <div id="output"></div>
+
+<script>
+    Handlebars.registerHelper('formatDate', function(date) {
+        var formattedDate = '';
+        if (date instanceof Date) {
+            var monthNames = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+            ];
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+
+            formattedDate = monthNames[monthIndex] + ' ' + day + ', ' + year;
+        }
+        return formattedDate;
+    });
+    Handlebars.registerHelper('truncateString',function(paragraph){
+        var truncatedPara='';
+        if(paragraph.length>=51){
+            truncatedPara=paragraph.slice(0,50);
+        }
+        truncatedPara+='....';
+        return truncatedPara;
+    });
+    Handlebars.registerPartial('footer', document.getElementById('footer-template').innerHTML);
+    Handlebars.registerPartial('header-content',document.getElementById('header-content-template').innerHTML);
+    Handlebars.registerPartial('body-content',document.getElementById('body-content-template').innerHTML);
+    Handlebars.registerPartial('footer-content',document.getElementById('footer-content-template').innerHTML);
+    var source = document.getElementById('main-template').innerHTML;
+
+    // Compiling the Template
+    var template = Handlebars.compile(source);
+
+    // Data Context
+    var context = {
+         posts: [ { "title": "First Post", "author": "Alice", "tags": ["Introduction", "Welcome"] }, 
+                        { "title": "Second Post", "author": "Bob", "tags": ["Updates", "Features"] } ] ,
+        event: { "name": "Conference", "date": new Date("2024-06-10") },
+        products: [ { "name": "Product A", "price": 100, "onSale": true, "salePrice": 80 },
+                    { "name": "Product B", "price": 200, "onSale": false }],
+        users: [ { "name": "Alice", "age": 30, "email": "alice@example.com" }, 
+                    { "name": "Bob", "age": 25, "email": "bob@example.com" } ],
+        currentYear: 2024,
+        article: { "title": "An Introduction to Handlebars", "content": "Handlebars is a popular templating engine that helps developers create dynamic HTML content easily. This tutorial will guide you through the basics and advanced features of Handlebars." },
+        sections: [ { "type": "header", "content": "Welcome to My Site","isHeader":true}, { "type": "body", "content": "This is the main content area.","isBody":true }, { "type": "footer", "content": "Thank you for visiting." } ]
+    };
+
+    // Rendering the Template with Context
+    var html = template(context);
+
+    // Injecting the Rendered HTML into the Output Container
+    document.getElementById('output').innerHTML = html;
+</script>
+</body>
+

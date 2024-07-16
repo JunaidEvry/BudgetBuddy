@@ -1,0 +1,36 @@
+<table class="table" id="transactionListTable">
+    <thead>
+        <tr>
+            <th>#ID</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Amount({{currency}})</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div id="noTransaction" class="alert" style="display:none;"></div>
+        {{#each transactions}}
+            <tr>
+                <td>{{incrementIndex @index}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.amount}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary editTransaction"  data-bs-target="#editTransactionModal" data-id="{{this.transactionID}}">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button"  class="btn btn-danger deleteTransactionBtn" data-id="{{this.transactionID}}">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div id="EmptyTransaction" class="alert"></div>

@@ -1,0 +1,61 @@
+<!-- addTransaction.hbs -->
+
+<div class="modal fade" id="verticalycentered" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="card-body">
+					<h5 class="card-title">{{form}} Transaction</h5>
+					<!-- Floating Labels Form -->
+					<form id="addTransactionForm" enctype="multipart/form-data" novalidate>
+						{{#if (eq form "Edit")}}
+							<input type="hidden" id="updateTransactionID" name="transactionID"/>
+						{{/if}}
+						<div class="mb-3">
+							<label for="transactionDate" class="form-label">Date</label>
+							<input type="date" class="form-control" id="transactionDate" name="date" max="{{currentDate}}" required>
+						</div>
+						<div class="mb-3">
+							<label for="transactionType" class="form-label">Type</label>
+							<select class="form-select" id="transactionType" name="type" required>
+								<option value="">Select Type</option>
+								<option value="Income">Income</option>
+								<option value="Expense">Expense</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="transactionCategory" class="form-label">Category</label>
+							<select class="form-select" id="transactionCategory" name="category" disabled required>
+								<option value="" disabled selected>Select category</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="transactionAmount" class="form-label">Amount (<span id="currency">{{currency}}</span>)</label>
+							<input type="number" class="form-control" id="transactionAmount" name="amount" required>
+							<div class="invalid-feedback">Please enter a valid amount.</div>
+						</div>
+						<div class="mb-3">
+							<label for="transactionDescription" class="form-label">Description</label>
+							<textarea class="form-control" id="transactionDescription" name="description" required></textarea>
+							<div class="invalid-feedback">Please enter a valid description (letters and spaces only).</div>
+						</div>
+						<div class="mb-3">
+							<label for="transactionReceipt" class="form-label">Upload Receipt (optional)</label>
+							<input type="file" class="form-control" id="transactionReceipt" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
+							<div class="invalid-feedback">Only PDF and image files are allowed.</div>
+							<div id="currentFileContent"></div>
+						</div>
+						<div id="message" class="alert" style="display: none;"></div>
+						<div id="message1" class="alert" style="display: none;"></div>
+
+						{{#if (eq form "Edit")}}
+                      	<button  id="updateTransactionBtn" class="btn btn-primary">Update Transaction</button>
+						{{else}}
+						<button class="btn btn-primary" id="addTransactionBtn">Add Transaction</button>
+						{{/if}}
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
