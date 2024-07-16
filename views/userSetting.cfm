@@ -32,7 +32,6 @@
 			  <label class="form-check-label" for="darkTheme">Dark</label>
 		  </div>
 		</div>
-	  
 	  	<!-- Time Zone Selection -->
 		<div class="form-group mb-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Set your preferred time zone for accurate time display.">
 		  <label for="timezoneSelect">Time Zone</label>
@@ -71,7 +70,6 @@
 				<option value="Pacific/Honolulu">Pacific/Honolulu</option>
 			</select>
 		</div>
-
 		<!-- Preferred Language Selection -->
 		<div class="form-group mb-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Choose your preferred language for the application.">
 		  <label for="languageSelect">Preferred Language</label>
